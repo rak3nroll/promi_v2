@@ -5,6 +5,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PromisorrisController;
 use App\Http\Controllers\PromisorryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifierController;
 use App\Models\Promisorris;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 Route::get('/',[HomeController::class,'index']);
 Route::post('/auth/logout',[LogoutController::class, 'logout']);
 
@@ -32,6 +33,9 @@ Route::post('/promisorry',[PromisorrisController::class, 'storePromisorry'])->na
 
 Route::get('/record/{id}',[PromisorrisController::class, 'showPromisorry'])->name('show.promi');
 Route::put('/record/{id}',[PromisorrisController::class, 'updatePromisorry'])->name('update.promi');
+
+Route::get('/verifier/promisorry',[VerifierController::class, 'create']);
+Route::post('/verifier/promisorry',[VerifierController::class, 'store']);
 
 Route::middleware(['auth','user-role:user'])->group(function()
 {

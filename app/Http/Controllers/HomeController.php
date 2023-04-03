@@ -58,7 +58,7 @@ class HomeController extends Controller
         ->where('is_approve','=','0')
         ->count();
 
-        return view('home',['promisorris'=>$data,'is_approve'=>$is_approve,'is_pending'=>$is_pending])-> with('title','ORMECO-Promisorry Potal | Home');
+        return view('home',['promisorris'=>$data,'is_approve'=>$is_approve,'is_pending'=>$is_pending])-> with('title','ORMECO-Promisorry Potal | Approver Page');
     }
     public function verifierHome(){
         $data = Promisorris::all();
@@ -71,7 +71,11 @@ class HomeController extends Controller
         ->where('is_approve','=','0')
         ->count();
 
-        return view('home',['promisorris'=>$data,'is_approve'=>$is_approve,'is_pending'=>$is_pending])-> with('title','ORMECO-Promisorry Potal | Home');
+        $is_verified = DB::table('promisorris')
+        ->where('is_verified','=','0')
+        ->count();
+
+        return view('home',['promisorris'=>$data,'is_approve'=>$is_approve,'is_pending'=>$is_pending,'is_verified'=>$is_verified])-> with('title','ORMECO-Promisorry Potal | Verifier Page');
     }
 }
 
