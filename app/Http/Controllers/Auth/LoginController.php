@@ -41,30 +41,28 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('login');
     }
-   
-    public function login(Request $request){
+
+    public function login(Request $request)
+    {
 
         $input = $request->all();
-        $this->validate($request,[
-            "email" => ['required','email'],
+        $this->validate($request, [
+            "email" => ['required', 'email'],
             "password" => 'required'
         ]);
-        if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
             session::flash('message', 'Welcome Back!');
-            if(Auth::user()->role=='approver'){
-                return redirect()->route('approver.home')-> with('title','ORMECO-Promisorry Potal | Approver Page');
+            if (Auth::user()->role == 'approver') {
+                return redirect()->route('approver.home')->with('title', 'ORMECO-Promisorry Potal | Approver Page');
+            } elseif (Auth::user()->role == 'verifier') {
+                return redirect()->route('verifier.home')->with('title', 'ORMECO-Promisorry Potal | Verifier Page');
+            } else {
+                return redirect()->route('home')->with('title', 'ORMECO-Promisorry Potal | Home');
             }
-            elseif(Auth::user()->role=='verifier'){
-                return redirect()->route('verifier.home')-> with('title','ORMECO-Promisorry Potal | Verifier Page');
-            }
-            else{
-                return redirect()->route('home')-> with('title','ORMECO-Promisorry Potal | Home');
-            }
-        }
-        else{
+        } else {
             return redirect()
-            ->route('login')
-            ->with('error','Incorrect email or password');
+                ->route('login')
+                ->with('error', 'Incorrect email or password');
         }
-       }
+    }
 }

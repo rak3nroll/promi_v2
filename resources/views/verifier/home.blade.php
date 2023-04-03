@@ -66,6 +66,22 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Notifications Dropdown Menu -->
+                @if ($is_verified == 0)
+                @else
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="far fa-bell"></i>
+                            <span class="badge badge-warning navbar-badge">{{ $is_verified }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-item dropdown-header">{{ $is_verified }} Notifications</span>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-envelope mr-2"></i> {{ $is_verified }} new promisorry for verification
+                            </a>
+                        </div>
+                    </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown">
                         <b>{{ Auth::user()->name }}</b>
@@ -258,16 +274,16 @@
                                                                 <td align="center">On-Process</td>
                                                             @endif
                                                             <td align="center">
-                                                                @if (Auth::user()->role != 'user' and $promisorri->is_approve == '0')
+                                                                @if (Auth::user()->role != 'user' and $promisorri->is_verified == '0')
                                                                     <a class="btn btn-primary btn-sm"
-                                                                        href="/record/{{ $promisorri->id }}">
+                                                                        href="/verifier/record/{{ $promisorri->id }}">
                                                                         <i class="fas fa-folder">
                                                                         </i>
                                                                         View
                                                                     </a>
-                                                                @elseif(Auth::user()->role != 'user' and $promisorri->is_approve == '1')
+                                                                @elseif(Auth::user()->role != 'user' and $promisorri->is_verified == '1')
                                                                     <a class="btn btn-success btn-sm"
-                                                                        href="/record/{{ $promisorri->id }}">
+                                                                        href="/verifier/record/{{ $promisorri->id }}">
                                                                         <i class="fas fa-folder">
                                                                         </i>
                                                                         View
