@@ -13,7 +13,6 @@ class VerifierController extends Controller
      */
     public function index()
     {
-       
     }
 
     /**
@@ -21,7 +20,7 @@ class VerifierController extends Controller
      */
     public function create()
     {
-        return view('create_promi_verifier')-> with('title','ORMECO-Promisorry Potal | Add New Promisorry');
+        return view('create_promi_verifier')->with('title', 'ORMECO-Promisorry Potal | Add New Promisorry');
     }
 
     /**
@@ -31,17 +30,17 @@ class VerifierController extends Controller
     {
         $validate_request = $request->validate([
             "consumer_name" => 'required',
-            "consumer_address" =>'required',
+            "consumer_address" => 'required',
             "consumer_contact" => 'required',
-            "account_no" =>'required',
-            "no_of_bills" =>'required',
-            "total_balance" =>'required',
+            "account_no" => 'required',
+            "no_of_bills" => 'required',
+            "total_balance" => 'required',
             "partial_payment" => 'required',
-            "total_amount" =>'required',
-            "months_to_pay" =>'required',
-            "per_month" =>'required',
-            "start_date" =>'required',
-            "exp_date" =>'required',
+            "total_amount" => 'required',
+            "months_to_pay" => 'required',
+            "per_month" => 'required',
+            "start_date" => 'required',
+            "exp_date" => 'required',
             "recon_fee" => '',
             "tr_no_recon" => '',
             "surcharge" => '',
@@ -51,9 +50,9 @@ class VerifierController extends Controller
             "is_approve" => '',
             "is_posted" => ''
         ]);
-            Promisorris::create($validate_request);
-        
-            return redirect('/home/verifier');
+        Promisorris::create($validate_request);
+
+        return redirect('/home/verifier');
     }
 
     /**
@@ -61,7 +60,8 @@ class VerifierController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Promisorris::findOrFail($id);
+        return view('verifier.update_promi', ['Promisorris' => $data])->with('title', 'ORMECO-Promisorry Potal | Update Records Promissory');
     }
 
     /**
@@ -77,7 +77,11 @@ class VerifierController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table('promisorris')
+            ->where('id', $id)
+            ->update(['is_verified' => '1']);
+
+        return redirect('/home/verifier')->with('message', 'Data was successfully updated');
     }
 
     /**

@@ -139,7 +139,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <form action="{{ route('store.promi') }}" method="post">
+        <form action="/promisorry" method="post">
           @csrf
         <div class="row">
           <div class="col-md-6">

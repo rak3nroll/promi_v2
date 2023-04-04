@@ -287,18 +287,18 @@
                   <label for="remarks">Remarks</label>
                   <textarea id="remarks" name="remarks" class="form-control" rows="4"></textarea>
                 </div>
+                <div class="row">
+                  <div class="col-12">
+                    <a href="{{ route('verifier.home') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-success float-right">
+                      Submit Promissory
+                    </button>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <a href="/" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-success float-right">
-              Submit Promissory
-            </button>
           </div>
         </div>
       </form>
