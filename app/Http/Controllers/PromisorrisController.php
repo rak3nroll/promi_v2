@@ -33,6 +33,7 @@ class PromisorrisController extends Controller
      */
     public function storePromisorry(Request $request)
     {
+        
         $validate_request = $request->validate([
             "consumer_name" => '',
             "consumer_address" =>'',
@@ -52,11 +53,14 @@ class PromisorrisController extends Controller
             "tr_no_surcharge" => '',
             "remarks" => '',
             "is_verified" => '',
+            "date_verified" => '',
             "is_approve" => '',
-            "is_posted" => ''
+            "approve_date" => '',
+            "is_posted" => '',
+            "date_posted" => '',
         ]);
             Promisorris::create($validate_request);
-        
+            
             return redirect('/home');
     }
 
@@ -82,33 +86,11 @@ class PromisorrisController extends Controller
      */
     public function updatePromisorry(Request $request, string $id)
     {
-        // $validate_request = $request->validate([
-        //     "consumer_name" => 'required',
-        //     "consumer_address" =>'required',
-        //     "consumer_contact" => 'required',
-        //     "account_no" =>'required',
-        //     "no_of_bills" =>'required',
-        //     "total_balance" =>'required',
-        //     "partial_payment" => 'required',
-        //     "total_amount" =>'required',
-        //     "months_to_pay" =>'required',
-        //     "per_month" =>'required',
-        //     "start_date" =>'required',
-        //     "exp_date" =>'required',
-        //     "recon_fee" => '',
-        //     "tr_no_recon" => '',
-        //     "surcharge" => '',
-        //     "tr_no_surcharge" => '',
-        //     "remarks" => '',
-        //     "is_verified" => '',
-        //     "is_approve" => '',
-        //     "is_posted" => ''
-        // ]);
         DB::table('promisorris')
         ->where('id',$id)
-        ->update(['is_approve' => '1']);
+        ->update(['is_approve' => '1', 'approve_date' => date('y-m-d', time())]);
 
-        return redirect('/home')->with('message', 'Data was successfully updated');
+        return redirect('/home/admin')->with('message', 'Data was successfully updated');
         
     }
 

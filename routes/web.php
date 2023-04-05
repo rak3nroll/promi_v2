@@ -3,10 +3,9 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PromisorrisController;
-use App\Http\Controllers\PromisorryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifierController;
-use App\Models\Promisorris;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +32,9 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'userHome'])->name('home');
     Route::get('/promisorry', [PromisorrisController::class, 'createPromisorry'])->name('create.promi');
     Route::post('/promisorry', [PromisorrisController::class, 'storePromisorry'])->name('store.promi');
+    Route::get('/promisorry/{id}', [UserController::class, 'showUserPromisorry'])->name('showUser.promi');
+    Route::put('/promisorry/{id}', [UserController::class, 'updateUserPromisorry'])->name('updateUser.promi');
+
 });
 
 Route::middleware(['auth', 'user-role:approver'])->group(function () {

@@ -51,7 +51,7 @@ class LoginController extends Controller
             "password" => 'required'
         ]);
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
-            session::flash('message', 'Welcome Back!');
+            session::flash('message', 'Welcome back');
             if (Auth::user()->role == 'approver') {
                 return redirect()->route('approver.home')->with('title', 'ORMECO-Promisorry Potal | Approver Page');
             } elseif (Auth::user()->role == 'verifier') {

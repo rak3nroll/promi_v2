@@ -37,6 +37,34 @@
 
         {{-- Email field --}}
         <div class="input-group mb-3">
+            {{-- <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}"> --}}
+                    <select class="custom-select" name="district">
+                      <option selected> - Select District - </option>
+                      <option value="District 1">District 1</option>
+                      <option value="District 1A">District 1A</option>
+                      <option value="District 2">District 2</option>
+                      <option value="District 3">District 3</option>
+                      <option value="District 4">District 4</option>
+                      <option value="District 5">District 5</option>
+                      <option value="District 6">District 6</option>
+                      <option value="District 7">District 7</option>
+                    </select>
+
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-map-marker-alt {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                        </div>
+                    </div>
+
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+         {{-- District field --}}
+         <div class="input-group mb-3">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}">
 

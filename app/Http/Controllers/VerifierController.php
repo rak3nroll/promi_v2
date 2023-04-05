@@ -48,6 +48,7 @@ class VerifierController extends Controller
             "remarks" => '',
             "is_verified" => '',
             "is_approve" => '',
+            "approve_date" => '',
             "is_posted" => ''
         ]);
         Promisorris::create($validate_request);

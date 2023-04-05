@@ -21,12 +21,12 @@
 @section('auth_header', __('adminlte::adminlte.login_message'))
 
 @section('auth_body')
-    <form action="{{ $login_url }}" method="post">
+    <form action="{{ $login_url }}" method="post" id="loginform">
         @csrf
 
         {{-- Email field --}}
         <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+            <input id="email" type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
             <div class="input-group-append">
@@ -44,7 +44,7 @@
 
         {{-- Password field --}}
         <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+            <input id="password" type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">
@@ -59,30 +59,15 @@
                 </span>
             @enderror
         </div>
-
         {{-- Login field --}}
-        <div class="row">
-            <div class="col-7">
-                <div class="icheck-primary" title="{{ __('adminlte::adminlte.remember_me_hint') }}">
-                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label for="remember">
-                        {{ __('adminlte::adminlte.remember_me') }}
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-5">
+            <div class="col-12">
                 <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-sign-in-alt"></span>
                     {{ __('adminlte::adminlte.sign_in') }}
                 </button>
             </div>
-        </div>
-
     </form>
 @stop
-
 @section('auth_footer')
     {{-- Password reset link --}}
     @if($password_reset_url)
@@ -102,3 +87,47 @@
         </p>
     @endif
 @stop
+<!-- jquery-validation -->
+<script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+<script>
+    $(function () {
+      $.validator.setDefaults({
+        submitHandler: function () {
+          alert( "Form successful submitted!" );
+        }
+      });
+      $('#loginform').validate({
+        rules: {
+          email: {
+            required: true,
+            email: true,
+          },
+          password: {
+            required: true,
+          },
+        },
+        messages: {
+          email: {
+            required: "Please enter a email address",
+            email: "Please enter a valid email address"
+          },
+          password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 5 characters long"
+          },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+    </script>

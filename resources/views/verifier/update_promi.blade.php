@@ -1,34 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title != '' ? $title : 'ORMECO-Promissory Portal' }}</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
-
-</head>
+@include('partials.__head_links')
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -115,6 +85,15 @@
                                         </a>
                                     </li>
                                 </ul>
+                            @elseif(Auth::user()->role == 'verifier')
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/verifier/promisorry" class="nav-link  ">
+                                            <i class="fas fa-file nav-icon"></i>
+                                            <p>Create New Promisorry</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             @else
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -157,186 +136,7 @@
             <section class="content">
                 <form action="/verifier/record/{{ $Promisorris->id }}" method="post">
                     @method('PUT')
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Consumer Information</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                            title="Collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="consumer_name">Consumer Name</label>
-                                        <input type="text" name="consumer_name" id="consumer_name"
-                                            class="form-control" disabled value="{{ $Promisorris->consumer_name }}">
-                                        @error('consumer_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="consumer_address">Address</label>
-                                        <input type="text" name="consumer_address" id="consumer_address"
-                                            class="form-control" disabled
-                                            value="{{ $Promisorris->consumer_address }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contact_no">Contact Number:</label>
-                                        <input type="text" name="consumer_contact" id="consumer_contact"
-                                            class="form-control" disabled
-                                            value="{{ $Promisorris->consumer_contact }}">
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Billing Information</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                            title="Collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="account_no">Account Number</label>
-                                        <input type="text" name="account_no" id="account_no" class="form-control"
-                                            disabled value="{{ $Promisorris->account_no }}">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="no_of_bills">Number of Bill to Pay</label>
-                                                <input type="text" name="no_of_bills" id="no_of_bills"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->no_of_bills }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="total_balance">Total Balance</label>
-                                                <input type="text" id="total_balance" name="total_balance"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->total_balance }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="partial">Partial Payment</label>
-                                                <input type="text" id="partial_payment" name="partial_payment"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->partial_payment }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="months_to_pay">How many months to pay</label>
-                                                <input type="text" id="months_to_pay" name="months_to_pay"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->months_to_pay }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="total_amount">Total Amount</label>
-                                                <input type="text" id="total_amount" name="total_amount"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->total_amount }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="per_month">Payment per month</label>
-                                                <input type="text" id="per_month" name="per_month"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->per_month }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="start_date">Start Date</label>
-                                                <input type="date" name="start_date" id="start_date"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->start_date }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="exp_date">Expiration Date</label>
-                                                <input type="date" name="exp_date" id="exp_date"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->exp_date }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Other Charges</label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="recon_fee">Reconnection Fee:</label>
-                                                <input type="text" name="recon_fee" id="recon_fee"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->recon_fee }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="tr_no_recon">TR Number</label>
-                                                <input type="text" name="tr_no_recon" id="tr_no_recon"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->tr_no_recon }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="surcharge">Surcharge:</label>
-                                                <input type="text" name="surcharge" id="surcharge"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->surcharge }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="tr_no_surcharge">TR Number</label>
-                                                <input type="text" name="tr_no_surcharge" id="tr_no_surcharge"
-                                                    class="form-control" disabled
-                                                    value="{{ $Promisorris->tr_no_surcharge }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="remarks">Remarks</label>
-                                        <textarea id="remarks" name="remarks" class="form-control" rows="4" disabled
-                                            value="{{ $Promisorris->remarks }}"></textarea>
-                                    </div>
+                    @include('forms.update_promi_forms')
                                     <div class="row">
                                         <div class="col-12">
                                             <a href="{{ route('verifier.home') }}" class="btn btn-secondary">Back</a>
@@ -360,89 +160,9 @@
                 </form>
             </section>
             <!-- /.content -->
-
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>ORMECO, Inc. &copy; Promisorry | Portal</strong>
-        </footer>
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
-
-    <!-- jQuery -->
-    <script src="/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="/plugins/moment/moment.min.js"></script>
-    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/dist/js/adminlte.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/dist/js/pages/dashboard.js"></script>
-
-    <script>
-        function round2Fixed(value) {
-            value = +value;
-
-            if (isNaN(value))
-                return NaN;
-
-            // Shift
-            value = value.toString().split('e');
-            value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + 2) : 2)));
-
-            // Shift back
-            value = value.toString().split('e');
-            return (+(value[0] + 'e' + (value[1] ? (+value[1] - 2) : -2))).toFixed(2);
-        }
-    </script>
-
-    <script>
-        $('#total_balance, #partial_payment').on('change keyup', function() {
-            var tot_bal = $("#total_balance").val();
-            var partial = $("#partial_payment").val();
-            var tot_amount = tot_bal - partial;
-
-            $("#total_amount").val(round2Fixed(tot_amount));
-        });
-
-
-        $('#total_amount, #months_to_pay').on('change keyup', function() {
-            var total_amount = $("#total_amount").val();
-            var month_to_pay = $("#months_to_pay").val();
-            var per_month = total_amount / month_to_pay;
-
-            $("#per_month").val(round2Fixed(per_month));
-        });
-    </script>
-
+       @include('partials.__footer_links')
 </body>
 
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Promisorris;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -37,11 +38,11 @@ class HomeController extends Controller
         $data = Promisorris::all();
 
         $is_approve = DB::table('promisorris')
-            ->where('is_posted', '<>', '0')
+            ->where('is_approve', '<>', '0')
             ->count();
 
         $is_pending = DB::table('promisorris')
-            ->where('is_posted', '=', '0')
+            ->where('is_approve', '=', '0')
             ->count();
 
         return view('home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending])->with('title', 'ORMECO-Promisorry Potal | Home');
@@ -63,10 +64,24 @@ class HomeController extends Controller
             ->where('is_verified', '=', '0')
             ->count();
 
-        return view('home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified])->with('title', 'ORMECO-Promisorry Potal | Approver Page');
+        $notif = DB::table('promisorris')
+            ->where('is_verified', '=', 1)
+            ->where('is_approve', '=', 0)
+            ->count();
+
+            if($notif <> 0){
+                session::flash('warning', 'You Have'.' '. $notif .' '. 'pending for Approval');
+                return view('approver.index', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified])->with('title', 'ORMECO-Promisorry Potal | Approver Page');
+            }else{  
+                return view('approver.index', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified])->with('title', 'ORMECO-Promisorry Potal | Approver Page');
+            }     
+
+       
+        
     }
     public function verifierHome()
     {
+        
         $data = Promisorris::all();
 
         $is_approve = DB::table('promisorris')
@@ -81,6 +96,13 @@ class HomeController extends Controller
             ->where('is_verified', '=', '0')
             ->count();
 
-        return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified])->with('title', 'ORMECO-Promisorry Potal | Verifier Page');
+        if($is_verified == 0){
+            return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified])->with('title', 'ORMECO-Promisorry Potal | Verifier Page', 'warning');
+        }else{
+            session::flash('warning', 'You Have'.' '. $is_verified .' '. 'pending for verification');
+
+            return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified])->with('title', 'ORMECO-Promisorry Potal | Verifier Page', 'warning');
+        }     
+
     }
 }
