@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('promisorris', function (Blueprint $table) {
-            $table->timestamp('date_verified')->after('is_verified');
-            $table->timestamp('date_posted')->after('is_posted');
+            $table->timestamp('date_verified')->nullable()->after('is_verified');
+            $table->timestamp('date_posted')->nullable()->after('is_posted');
             $table->string('encoder');
             $table->string('district');
         });
