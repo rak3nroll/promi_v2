@@ -30,17 +30,16 @@
                         <b>{{ Auth::user()->name }}</b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
                         <span class="dropdown-item dropdown-header"> <i class="fas fa-users-cog mr-2"></i>User
                             Settings</span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item ">
-                            <i class="fas fa-key mr-2 "></i> Change Password
+                        {{-- <i class="fas fa-key mr-2"></i> Change Password --}}
+                            <button type="button" class="btn btn-no-outline-info btn-block btn-flat" data-toggle="modal" data-target="#modal-info"><i class="fas fa-key mr-2"></i> Change Password</button>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}"
                             class="dropdown-item"onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <i class="fa fa-fw fa-power-off text-red mr-2"></i>Logout
+                            <button type="button" class="btn btn-no-outline-info btn-block btn-flat" ><i class="fa fa-fw fa-power-off text-red mr-2"></i>Logout</button>
                         </a>
                         <form id="logout-form" action="/auth/logout" method="POST" style="display: none;">
                             {{ csrf_field() }}
@@ -152,7 +151,7 @@
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>{{ $is_approve }}</h3>
-                                    <p>Approve Promissory</p>
+                                    <h4>Approve Promissory</h4>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-thumbs-up"></i>
@@ -165,7 +164,7 @@
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3>{{ $is_pending }}</h3>
-                                    <p>On-Process Promissory</p>
+                                    <h4>On-Process Promissory</h4>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-file-signature"></i>
@@ -173,6 +172,19 @@
                             </div>
                         </div>
                         <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{{ $is_posted }}</h3>
+
+                                    <h4>Posted Promissory</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.row -->
                     <!-- Main row -->
@@ -210,12 +222,14 @@
                                                             <td align="center">{{ $promisorri->account_no }}</td>
                                                             <td align="center">{{ $promisorri->no_of_bills }}</td>
                                                             <td align="center">{{ $promisorri->total_amount }}</td>
-                                                            @if ($promisorri->is_approve == '1')
-                                                                <td align="center">Approved</td>
-                                                            @elseif ($promisorri->is_verified == '1')
-                                                                <td align="center">Verified</td>
+                                                            @if ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '1' )
+                                                            <td align="center">Posted</td>
+                                                            @elseif ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
+                                                            <td align="center">Approved</td>
+                                                            @elseif ($promisorri->is_approve == '0' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
+                                                            <td align="center">Verified</td>
                                                             @else
-                                                                <td align="center">On-Process</td>
+                                                            <td align="center">On-Process</td>
                                                             @endif
                                                             <td align="center">
                                                                 @if (Auth::user()->role != 'user' and $promisorri->is_approve == '0')
@@ -238,6 +252,13 @@
                                                                         <i class="fas fa-folder">
                                                                         </i>
                                                                         Edit
+                                                                    </a>
+                                                                    @elseif(Auth::user()->role == 'user' and $promisorri->is_verified <> '0')
+                                                                    <a class="btn btn-info btn-sm"
+                                                                        href="/promisorry/{{ $promisorri->id }}">
+                                                                        <i class="fas fa-folder">
+                                                                        </i>
+                                                                        view
                                                                     </a>
                                                                 @endif
                                                             </td>
@@ -267,10 +288,33 @@
                     </section>
                     <!-- /.row (main row) -->
                 </div><!-- /.container-fluid -->
+                <div class="modal fade" id="modal-info">
+                    <div class="modal-dialog">
+                      <div class="modal-content bg-info">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Info Modal</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>One fine body&hellip;</p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-outline-light">Save changes</button>
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
+                  <!-- /.modal -->
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+
       @include('partials.__footer_links')
 </body>
 

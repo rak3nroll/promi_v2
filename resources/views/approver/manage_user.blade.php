@@ -12,10 +12,10 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="{{ route('verifier.home') }}" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="{{ route('approver.home') }}" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('verifier.home') }}" class="nav-link">Home</a>
+        <a href="{{ route('approver.home') }}" class="nav-link">Home</a>
       </li>
 
     </ul>
@@ -66,7 +66,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('verifier.home') }}" class="brand-link">
+    <a href="{{ route('approver.home') }}" class="brand-link">
       <img src="/dist/img/ORMECOLOGO.png" alt="ORMECO-Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">PromiPortal</span>
     </a>
@@ -109,13 +109,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">Manage User</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('approver.home') }}">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
+              <li class="breadcrumb-item active">Manage User</li>
+            </ol> 
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -123,54 +123,6 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{ $is_approve }}</h3>
-                <p>Approve Promissory</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-thumbs-up"></i>
-              </div>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ $is_pending }}</h3>
-
-                <p>On-Process Promissory</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-file-signature"></i>
-              </div>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>{{ $is_posted }}</h3>
-
-                    <h4>Posted Promissory</h4>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-tags"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-        </div>
-        <!-- /.row -->
-        <!-- Main row -->
         <section class="content">
             <div class="container-fluid">
               <div class="row">
@@ -178,19 +130,18 @@
                   <!-- /.card -->
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Promissory Monitoring Table</h3>
+                      <h3 class="card-title">User Table</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                      <table id="promi_table" class="table table-bordered table-striped">
+                      <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr align="center">
-                                <th>Consumer Name</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Account #</th>
-                                <th>No. of Bills</th>
-                                <th>Total Amount</th>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email Address</th>
+                                <th>User Role</th>
+                                <th>District Office</th>
                                 <th>Status</th>
                                 <th></th>
                               </tr>
@@ -198,60 +149,78 @@
                         <tbody>
                           @foreach ($promisorris as $promisorri )                 
                         <tr>
-                            <td>{{ $promisorri->consumer_name}}</td>
-                            <td>{{ $promisorri->consumer_address }}</td>
-                            <td align="center">{{ $promisorri->consumer_contact }}</td>
-                            <td align="center">{{ $promisorri->account_no }}</td>
-                            <td align="center">{{ $promisorri->no_of_bills }}</td>
-                            <td align="center">{{ $promisorri->total_amount }}</td>
-                            @if ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '1' )
-                            <td align="center">Posted</td>
-                            @elseif ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
-                            <td align="center">Approved</td>
-                            @elseif ($promisorri->is_approve == '0' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
-                            <td align="center">Verified</td>
+                            <td>{{ $promisorri->id}}</td>
+                            <td>{{ $promisorri->name }}</td>
+                            <td align="center">{{ $promisorri->email }}</td>
+                            <td align="center">{{ $promisorri->role }}</td>
+                            <td align="center">{{ $promisorri->district }}</td>
+                            @if ($promisorri->status == 1)
+                              <td align="center">Active</td>
                             @else
-                            <td align="center">On-Process</td>
+                              <td align="center">Deactivated</td>
                             @endif
-                            @if ($promisorri->is_verified==0)
                             <td align="center">
-                              <a class="btn btn-primary btn-sm disabled" href="/record/{{ $promisorri->id }}">
-                               <i class="fas fa-folder">
-                               </i>
-                                    View
-                               </a>
+                               <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-user-{{ $promisorri->id}}">
+                                <i class="fas fa-user-edit">
+                                </i>
+                                     Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm deletemessage" href="#" >
+                                  <i class="fas fa-user-slash">
+                                  </i>
+                                      Deactivate
+                                  </a>
                             </td>
                           </tr>
-                          @elseif ($promisorri->is_approve==1)
-                          <td align="center">
-                            <a class="btn btn-success btn-sm" href="/record/{{ $promisorri->id }}">
-                             <i class="fas fa-folder">
-                             </i>
-                                  View
-                             </a>
-                          </td>
-                          @else
-                          <td align="center">
-                            <a class="btn btn-primary btn-sm" href="/record/{{ $promisorri->id }}">
-                             <i class="fas fa-folder">
-                             </i>
-                                  View
-                             </a>
-                          </td>
-                        </tr>
-                          @endif
+                          <div class="modal fade" id="modal-edit-user-{{ $promisorri->id}}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title"><i class="fas fa-edit"></i> Edit user information</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                <form action="edit/user/{{ $promisorri->id}}" method="post">
+                                  @method('PUT')
+                                    @csrf
+                                    <div class="form-group">
+                                      <label for="user_id">User ID:</label>
+                                      <input type="text" name="user_id" id="user_id" class="form-control col-4" disabled value="{{ $promisorri->id }}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="user_name">Name:</label>
+                                      <input type="text" name="user_name" id="user_name" class="form-control" disabled value="{{ $promisorri->name }}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="email">Email Address:</label>
+                                      <input type="text" name="email" id="email" class="form-control" disabled value="{{ $promisorri->email }}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="role">User Role:</label>
+                                      <input type="text" name="role" id="role" class="form-control" value="{{ $promisorri->role }}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="district">District Office:</label>
+                                      <input type="text" name="district" id="district" class="form-control" value="{{ $promisorri->district }}">
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                  <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                                </form>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                          </div>
+                          <!-- /.modal -->
                           @endforeach
                         </tbody>
-                        <tfoot>
-                        {{-- <tr>
-                          <th>Rendering engine</th>
-                          <th>Browser</th>
-                          <th>Platform(s)</th>
-                          <th>Engine version</th>
-                          <th>CSS grade</th>
-                        </tr> --}}
-                        </tfoot>
                       </table>
+                   
                     </div>
                     <!-- /.card-body -->
                   </div>
@@ -262,10 +231,8 @@
               <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
+            
           </section>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

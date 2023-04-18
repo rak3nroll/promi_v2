@@ -56,6 +56,8 @@ class LoginController extends Controller
                 return redirect()->route('approver.home')->with('title', 'ORMECO-Promisorry Potal | Approver Page');
             } elseif (Auth::user()->role == 'verifier') {
                 return redirect()->route('verifier.home')->with('title', 'ORMECO-Promisorry Potal | Verifier Page');
+            }elseif (Auth::user()->role == 'billing') {
+                return redirect()->route('billing.home')->with('title', 'ORMECO-Promisorry Potal | Billing Page');
             } else {
                 return redirect()->route('home')->with('title', 'ORMECO-Promisorry Potal | Home');
             }

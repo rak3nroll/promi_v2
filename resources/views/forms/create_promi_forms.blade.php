@@ -10,15 +10,15 @@
               </button>
             </div>
           </div>
+          
           <div class="card-body">
             <div class="form-group">
+              <input type="text" name="encoder" id="encoder" class="form-control" hidden value="{{ auth::user()->name }}">
+              <input type="text" name="district" id="district" class="form-control" hidden value="{{ auth::user()->district }}">
+            </div>
+            <div class="form-group">
               <label for="consumer_name">Consumer Name</label>
-              <input type="text" name="consumer_name" id="consumer_name" class="@error('name') is-invalid @enderror form-control">
-              @error('name')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-              @enderror
+              <input type="text" name="consumer_name" id="consumer_name" class="form-control">
             </div>
             <div class="form-group">
               <label for="consumer_address">Address</label>

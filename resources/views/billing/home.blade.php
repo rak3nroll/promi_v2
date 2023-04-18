@@ -15,28 +15,29 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/home/verifier" class="nav-link">Home</a>
+                    <a href="/home/billing" class="nav-link">Home</a>
                 </li>
 
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Notifications Dropdown Menu -->
-                @if ($is_verified == 0)
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">{{ $is_verified }}</span>
+                @if ($is_posted == 0)
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">{{ $is_posted }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">{{ $is_posted }} Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> {{ $is_posted }} new promisorry for posting
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">{{ $is_verified }} Notifications</span>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-envelope mr-2"></i> {{ $is_verified }} new promisorry for verification
-                            </a>
-                        </div>
-                    </li>
+                    </div>
+                </li>
+                @else
+                   
                 @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown">
@@ -109,6 +110,15 @@
                                         </a>
                                     </li>
                                 </ul>
+                            @elseif(Auth::user()->role == 'billing')
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route("billing.home") }}" class="nav-link  ">
+                                            <i class="fas fa-home nav-icon"></i>
+                                            <p>Home</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             @else
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -138,7 +148,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="//home/verifier">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/home/billing">Home</a></li>
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
@@ -193,7 +203,6 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                     <!-- /.row -->
                     <!-- Main row -->
                     <section class="content">
@@ -230,26 +239,26 @@
                                                             <td align="center">{{ $promisorri->account_no }}</td>
                                                             <td align="center">{{ $promisorri->no_of_bills }}</td>
                                                             <td align="center">{{ $promisorri->total_amount }}</td>
-                                                        @if ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '1' )
-                                                            <td align="center">Posted</td>
-                                                        @elseif ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
-                                                            <td align="center">Approved</td>
-                                                        @elseif ($promisorri->is_approve == '0' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
-                                                            <td align="center">Verified</td>
-                                                        @else
-                                                            <td align="center">On-Process</td>
-                                                        @endif
+                                                            @if ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '1' )
+                                                                <td align="center">Posted</td>
+                                                            @elseif ($promisorri->is_approve == '1' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
+                                                                <td align="center">Approved</td>
+                                                            @elseif ($promisorri->is_approve == '0' and $promisorri->is_verified == '1' and $promisorri->is_posted == '0')
+                                                                <td align="center">Verified</td>
+                                                            @else
+                                                                <td align="center">On-Process</td>
+                                                            @endif
                                                             <td align="center">
-                                                                @if (Auth::user()->role != 'user' and $promisorri->is_verified == '0')
+                                                                @if (Auth::user()->role != 'user' and $promisorri->is_posted == '0' and $promisorri->is_approve == '1')
                                                                     <a class="btn btn-primary btn-sm"
-                                                                        href="/verifier/record/{{ $promisorri->id }}">
+                                                                        href="/billing/record/{{ $promisorri->id }}">
                                                                         <i class="fas fa-folder">
                                                                         </i>
                                                                         View
                                                                     </a>
-                                                                @elseif(Auth::user()->role != 'user' and $promisorri->is_verified == '1')
+                                                                @elseif(Auth::user()->role != 'user' and $promisorri->is_posted == '1')
                                                                     <a class="btn btn-success btn-sm"
-                                                                        href="/verifier/record/{{ $promisorri->id }}">
+                                                                        href="/billing/record/{{ $promisorri->id }}">
                                                                         <i class="fas fa-folder">
                                                                         </i>
                                                                         View

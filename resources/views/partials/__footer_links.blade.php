@@ -11,37 +11,30 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/../../plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/../../plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="/plugins/chart.js/Chart.min.js"></script>
+<script src="/../../plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="/../../plugins/sparklines/sparkline.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="/../../plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="/plugins/moment/moment.min.js"></script>
-<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/../../plugins/moment/moment.min.js"></script>
+<script src="/../../plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="/../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="/../../plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/dist/js/pages/dashboard.js"></script>
+<script src="/../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
 <!-- DataTables  & Plugins -->
 <script src="/../../plugins/datatables/jquery.dataTables.min.js"></script>
@@ -64,6 +57,9 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="/../../plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="/../../plugins/jquery-validation/additional-methods.min.js"></script>
 
+<!-- AdminLTE App -->
+<script src="/../../dist/js/adminlte.js"></script>
+
 <script>
 $(function() {
     $("#example1").DataTable({
@@ -76,7 +72,7 @@ $(function() {
     $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
-        "searching": false,
+        "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,
@@ -86,6 +82,7 @@ $(function() {
 </script>
 
 <script>
+  
 @if (Session::has('message'))
     toastr.options = {
         "closeButton": true,
@@ -124,6 +121,7 @@ $(function() {
 })
 @endif
 </script>
+
 <script>
     function round2Fixed(value) {
     value = +value;
@@ -162,11 +160,11 @@ $(function() {
   
   <script>
     $(function () {
-      $.validator.setDefaults({
-        submitHandler: function () {
-          alert( "Form successful submitted!" );
-        }
-      });
+      // $.validator.setDefaults({
+      //   submitHandler: function () {
+      //     alert( "Form successful submitted!" );
+      //   }
+      // });
       $('#createPromiForm').validate({
         rules: {
           consumer_name: {
@@ -197,6 +195,18 @@ $(function() {
             required: true,
           },
           exp_date: {
+            required: true,
+          },
+          recon_fee: {
+            required: true,
+          },
+          tr_no_recon: {
+            required: true,
+          },
+          surcharge: {
+            required: true,
+          },
+          tr_no_surcharge: {
             required: true,
           },
         },
@@ -231,6 +241,18 @@ $(function() {
           exp_date: {
             required: "Please enter a expiration date",
           },
+          recon_fee: {
+            required: "Please provide Reconnetion Fee",
+          },
+          tr_no_recon: {
+            required: "Invalid TR Number",
+          },
+          surcharge: {
+            required: "Please provide Surcharge",
+          },
+          tr_no_surcharge: {
+            required: "Invalid TR Number",
+          },
         },
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -244,5 +266,26 @@ $(function() {
           $(element).removeClass('is-invalid');
         }
       });
+    });
+    </script>
+    <script>
+       $('.deletemessage').click(function() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to deactivate this account?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, deactivate!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deactivated!',
+            'User account has been deactivated.',
+            'success'
+          )
+        }
+      })
     });
     </script>

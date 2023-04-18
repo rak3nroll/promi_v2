@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApproverController;
+use App\Http\Controllers\BillingUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PromisorrisController;
@@ -39,6 +41,9 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
 
 Route::middleware(['auth', 'user-role:approver'])->group(function () {
     Route::get('/home/admin', [HomeController::class, 'approverHome'])->name('approver.home');
+    Route::get('/admin/manage_user', [PromisorrisController::class, 'showuser'])->name('show.user');
+    Route::put('/edit/user/{id}', [ApproverController::class, 'update'])->name('update.user');
+    Route::get('/user/{id}', [PromisorrisController::class, 'showUserDetails'])->name('user.details');
     Route::get('/record/{id}', [PromisorrisController::class, 'showPromisorry'])->name('show.promi');
     Route::put('/record/{id}', [PromisorrisController::class, 'updatePromisorry'])->name('update.promi');
 });
@@ -50,3 +55,11 @@ Route::middleware(['auth', 'user-role:verifier'])->group(function () {
     Route::get('/verifier/record/{id}', [VerifierController::class, 'show'])->name('verifier.show');
     Route::put('/verifier/record/{id}', [VerifierController::class, 'update'])->name('verifier.update');
 });
+
+Route::middleware(['auth', 'user-role:billing'])->group(function () {
+    Route::get('/home/billing', [HomeController::class, 'billingHome'])->name('billing.home');
+    Route::get('/billing/record/{id}', [BillingUserController::class, 'show'])->name('billing.show');
+    Route::put('/billing/record/{id}', [BillingUserController::class, 'update'])->name('billing.update');
+    
+});
+

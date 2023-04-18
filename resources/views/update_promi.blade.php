@@ -339,10 +339,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <a href="home" class="btn btn-secondary">Back</a>
+                                            <a href="{{ route('home') }}" class="btn btn-secondary">Back</a>
+                                            @if ($Promisorris->is_verified == '0')
                                                 <button type="submit" class="btn btn-info float-right">
-                                                    Save Record
+                                                    Submit Promissory
                                                 </button>
+                                            @else
+                                                <button type="submit" class="btn btn-info float-right" disabled>
+                                                    Submit Promissory
+                                                </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
