@@ -117,7 +117,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="recon_fee">Reconnection Fee:</label>
-                  <input type="text" name="recon_fee" id="recon_fee" class="form-control">             
+                  <input type="text" name="recon_fee" id="recon_fee" class="form-control" value="112.00">             
                 </div>
               </div> 
               <div class="col-sm-6">
