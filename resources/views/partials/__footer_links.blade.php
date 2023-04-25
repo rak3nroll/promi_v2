@@ -36,6 +36,9 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- overlayScrollbars -->
 <script src="/../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
+<!-- bs-custom-file-input -->
+<script src="/../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="/../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -61,6 +64,12 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="/../../dist/js/adminlte.js"></script>
 
 <script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+  </script>
+<script>
+
 $(function() {
     $("#example1").DataTable({
         "responsive": true,
@@ -108,11 +117,7 @@ $(function() {
 @endif
 
 @if (Session::has('warning'))
-    // toastr.options = {
-    //     "closeButton": true,
-    //     "progressBar": true
-    // }
-    // toastr.warning("{{ session('warning') }}");
+   
     $(document).Toasts('create', {
     class: 'bg-warning',
     title: 'Notification',
@@ -202,12 +207,14 @@ $(function() {
           },
           tr_no_recon: {
             required: true,
+            min: 8,
           },
           surcharge: {
             required: true,
           },
           tr_no_surcharge: {
             required: true,
+            min: 8,
           },
         },
         messages: {
@@ -251,7 +258,7 @@ $(function() {
             required: "Please provide Surcharge",
           },
           tr_no_surcharge: {
-            required: "Invalid TR Number",
+            required: "Invalid TR Number must have atleast 8",
           },
         },
         errorElement: 'span',
@@ -288,4 +295,13 @@ $(function() {
         }
       })
     });
+    </script>
+    <script>
+      function isChecked(){
+      var total_bal = document.getElementById("total_balance").value;
+        if(document.getElementById("partial").checked){
+          document.getElementById("partial_payment").value = total_bal * .50;
+          document.getElementById("total_amount").value = total_bal - document.getElementById("partial_payment").value;
+        }
+      }
     </script>

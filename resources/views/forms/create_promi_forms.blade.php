@@ -28,11 +28,24 @@
               <label for="contact_no">Contact Number:</label>
               <input type="text" name="consumer_contact" id="consumer_contact" class="form-control">
             </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Attachment</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile">
+                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">Upload</span>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- /.card-body -->
         </div>
       </div>
-      <div class="col-md-6" >
+
+     <div class="col-md-6" >
         <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">Billing Information</h3>
@@ -67,7 +80,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="partial">Partial Payment</label>
+                  <label for="partial_payment">Partial Payment: </label>
+                  
+                    <input name="partial" id="partial" type="checkbox" onclick="isChecked()">
+                    <label for="">  50%</label>
+                  
                   <input type="text" id="partial_payment" name="partial_payment" class="form-control">
                 </div>
               </div>
