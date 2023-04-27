@@ -28,18 +28,7 @@
               <label for="contact_no">Contact Number:</label>
               <input type="text" name="consumer_contact" id="consumer_contact" class="form-control">
             </div>
-            <div class="form-group">
-              <label for="exampleInputFile">Attachment</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile">
-                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                  <span class="input-group-text">Upload</span>
-                </div>
-              </div>
-            </div>
+            
           </div>
           <!-- /.card-body -->
         </div>
