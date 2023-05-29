@@ -30,7 +30,15 @@ class BillingUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        DB::connection('mysql_second')->table('promissory_note')->insert([
+            'promi_name'=>'consumer_name',
+            'consumer_address' => 'consumer_address',
+            'total_amount' => 'total_amount',
+            'is_posted' => '1'
+        ]);
+        
+            return redirect('/home')->with('info','New Promisorry Submited Successfully!');
     }
 
     /**
@@ -59,9 +67,12 @@ class BillingUserController extends Controller
         ->where('id',$id)
         ->update(['is_posted' => '1', 'date_posted' => now()->toDateTimeString()]);
 
+        DB::connection('mysql_second')->table('promissory_note')
+        ->where('promi_id',$id)
+        ->update(['is_posted' => '1']);
+
     return redirect('/home/billing')->with('message', 'Data was successfully updated');
     }
-
     /**
      * Remove the specified resource from storage.
      */

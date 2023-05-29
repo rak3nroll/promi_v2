@@ -215,7 +215,7 @@
                                                         <th>Contact #</th>
                                                         <th>Account #</th>
                                                         <th>No. of Bills</th>
-                                                        <th>Total Amount</th>
+                                                        <th>Total Balance</th>
                                                         <th>Status</th>
                                                         <th></th>
                                                     </tr>

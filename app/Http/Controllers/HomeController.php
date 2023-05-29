@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         if (view()->exists('auth.login')) {
-            return view('auth.login')->with('title', 'ORMECO-Promisorry Potal | Login');
+            return view('auth.login')->with('title', 'ORMECO-Promissory Potal | Login');
         } else {
             return abort(404);
         }
@@ -54,7 +54,7 @@ class HomeController extends Controller
             ->where('district', '=', Auth::user()->district)
             ->count();
 
-        return view('home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Portal | Home');
+        return view('home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Portal | Home');
     }
 
     public function approverHome()
@@ -85,9 +85,9 @@ class HomeController extends Controller
 
             if($notif <> 0){
                 session::flash('warning', 'You Have'.' '. $notif .' '. 'pending for Approval');
-                return view('approver.index', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Portal | Approver Page');
+                return view('approver.index', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Portal | Approver Page');
             }else{  
-                return view('approver.index', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Portal | Approver Page');
+                return view('approver.index', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Portal | Approver Page');
             }     
 
        
@@ -120,11 +120,11 @@ class HomeController extends Controller
             ->count();
 
         if($is_verified == 0){
-            return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Potal | Verifier Page', 'warning');
+            return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Potal | Verifier Page', 'warning');
         }else{
             session::flash('warning', 'You Have'.' '. $is_verified .' '. 'pending for verification');
 
-            return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Potal | Verifier Page', 'warning');
+            return view('verifier.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Potal | Verifier Page', 'warning');
         }     
 
     }
@@ -156,10 +156,10 @@ class HomeController extends Controller
             ->count();
 
         if($notif == 0){
-            return view('billing.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Potal | Billing', 'warning');
+            return view('billing.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Potal | Billing', 'warning');
         }else{
             session::flash('warning', 'You Have'.' '. $notif .' '. 'pending for posting');
-            return view('billing.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promisorry Potal | Billing', 'warning');
+            return view('billing.home', ['promisorris' => $data, 'is_approve' => $is_approve, 'is_pending' => $is_pending, 'is_verified' => $is_verified, 'is_posted' => $is_posted])->with('title', 'ORMECO-Promissory Potal | Billing', 'warning');
         }     
 
     }

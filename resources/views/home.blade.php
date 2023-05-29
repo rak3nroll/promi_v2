@@ -82,16 +82,16 @@
                                     <li class="nav-item">
                                         <a href="{{ route('create.promi') }}" class="nav-link active ">
                                             <i class="fas fa-file nav-icon"></i>
-                                            <p>Create New Promisorry</p>
+                                            <p>Create New Promissory</p>
                                         </a>
                                     </li>
                                 </ul>
                             @elseif(Auth::user()->role == 'verifier')
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="/verifier/promisorry" class="nav-link  ">
+                                        <a href="/verifier/Promissory" class="nav-link  ">
                                             <i class="fas fa-file nav-icon"></i>
-                                            <p>Create New Promisorry</p>
+                                            <p>Create New Promissory</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -151,7 +151,7 @@
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>{{ $is_approve }}</h3>
-                                    <h4>Approve Promissory</h4>
+                                    <h4>Approved Promissory</h4>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-thumbs-up"></i>
@@ -177,7 +177,6 @@
                             <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3>{{ $is_posted }}</h3>
-
                                     <h4>Posted Promissory</p>
                                 </div>
                                 <div class="icon">
@@ -207,7 +206,7 @@
                                                         <th>Contact #</th>
                                                         <th>Account #</th>
                                                         <th>No. of Bills</th>
-                                                        <th>Total Amount</th>
+                                                        <th>Total Balance</th>
                                                         <th>Status</th>
                                                         <th></th>
                                                     </tr>
@@ -266,13 +265,6 @@
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
-                                                    {{-- <tr>
-                          <th>Rendering engine</th>
-                          <th>Browser</th>
-                          <th>Platform(s)</th>
-                          <th>Engine version</th>
-                          <th>CSS grade</th>
-                        </tr> --}}
                                                 </tfoot>
                                             </table>
                                         </div>

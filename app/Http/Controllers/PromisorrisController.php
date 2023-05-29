@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\promissory_notes;
+use App\Models\Consumers;
 use App\Models\Promisorris;
+use App\Models\promissory_note;
 use App\Models\User;
 use App\Models\Users;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\Console\Input\Input;
 
 class PromisorrisController extends Controller
 {
@@ -64,8 +69,27 @@ class PromisorrisController extends Controller
             "encoder" => '',
             "district" => '',
         ]);
-            Promisorris::create($validate_request);
-        
+            $promi = Promisorris::create($validate_request);
+
+            $name = $promi['consumer_name'];
+            $account_code = $promi['account_no'];
+            $address = $promi['consumer_address'];
+            $tot_amount = $promi['total_amount'];
+            $promi_date = $promi['start_date'];
+            $trans_date = Carbon::today()->toDateString();
+            $promi_id = $promi['id'];
+          
+            $acct_no = DB::connection('mysql_second')->table('consumer')
+            ->select('account_no')
+            ->where('account_code','=', $account_code)->value('account_no');
+
+            $billmonth = DB::connection('mysql_second')->table('consumer')
+            ->select('billmonth')
+            ->where('account_code','=', $account_code)->value('billmonth');
+            
+            $data=array("account_no"=>$acct_no, "account_code"=>$account_code, "promi_name"=>$name,"billmonth"=>$billmonth, "promi_date"=>$promi_date,"trandate"=>$trans_date,"consumer_address"=>$address, "total_balance"=>$tot_amount, "is_posted"=>0, "promi_id"=> $promi_id);
+            promissory_note::insert($data);
+
             return redirect('/home')->with('info','New Promisorry Submited Successfully!');
     }
 

@@ -108,7 +108,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <form action="/promisorry" method="post" id="createPromiForm">
+      <form action="/promisorry" method="post" id="createPromiForm">
          @include('forms.create_promi_forms')
                 <div class="row">
                   <div class="col-12">
@@ -125,7 +125,7 @@
         </div>
         </div>
       </form>
-      </section>
+    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

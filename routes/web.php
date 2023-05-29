@@ -34,6 +34,7 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'userHome'])->name('home');
     Route::get('/promisorry', [PromisorrisController::class, 'createPromisorry'])->name('create.promi');
     Route::post('/promisorry', [PromisorrisController::class, 'storePromisorry'])->name('store.promi');
+    // Route::post('/promisorry', [PromisorrisController::class, 'storeBilling']);
     Route::get('/promisorry/{id}', [UserController::class, 'showUserPromisorry'])->name('showUser.promi');
     Route::put('/promisorry/{id}', [UserController::class, 'updateUserPromisorry'])->name('updateUser.promi');
 
@@ -60,6 +61,7 @@ Route::middleware(['auth', 'user-role:billing'])->group(function () {
     Route::get('/home/billing', [HomeController::class, 'billingHome'])->name('billing.home');
     Route::get('/billing/record/{id}', [BillingUserController::class, 'show'])->name('billing.show');
     Route::put('/billing/record/{id}', [BillingUserController::class, 'update'])->name('billing.update');
+    Route::post('/billing/record/{id}', [BillingUserController::class, 'updatelocal']);
     
 });
 

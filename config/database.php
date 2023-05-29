@@ -62,6 +62,26 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+        
+        'mysql_second' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_SECOND'),
+            'host' => env('DB_HOST_SECOND', '192.168.100.100'),
+            'port' => env('DB_PORT_SECOND', '3306'),
+            'database' => env('DB_DATABASE_SECOND', 'billing_system'),
+            'username' => env('DB_USERNAME_SECOND', 'root'),
+            'password' => env('DB_PASSWORD_SECOND', 'root'),
+            'unix_socket' => env('DB_SOCKET_SECOND', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
