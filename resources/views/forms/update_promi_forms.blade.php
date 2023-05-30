@@ -138,5 +138,5 @@
         </div>                   
         <div class="form-group">
           <label for="remarks">Remarks</label>
-          <textarea id="remarks" name="remarks" class="form-control" rows="4" disabled value="{{ $Promisorris->remarks }}"></textarea>
+          <textarea id="remarks" name="remarks" class="form-control" rows="4" disabled value="">{{ $Promisorris->remarks }}</textarea>
         </div>
