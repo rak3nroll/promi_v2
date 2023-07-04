@@ -37,6 +37,8 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     // Route::post('/promisorry', [PromisorrisController::class, 'storeBilling']);
     Route::get('/promisorry/{id}', [UserController::class, 'showUserPromisorry'])->name('showUser.promi');
     Route::put('/promisorry/{id}', [UserController::class, 'updateUserPromisorry'])->name('updateUser.promi');
+    Route::get('/print/{id}', [UserController::class, 'PrintPromi'])->name('print_promi');
+    Route::get('/print/{id}', [UserController::class, 'Getusers']);
 
 });
 

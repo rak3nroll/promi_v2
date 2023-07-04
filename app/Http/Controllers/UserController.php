@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Promisorris;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -39,6 +40,29 @@ class UserController extends Controller
     {
         $data = Promisorris::findOrFail($id);
         return view('update_promi',['Promisorris'=>$data])->with('title','ORMECO-Promisorry Potal | Update Records Promissory');
+    }
+
+    public function PrintPromi(string $id)
+    {
+        $users = DB::table('promisorris')
+        ->join('users','promisorris.verified_by','=','users.id')
+        ->select('users.*','promisorris.*')
+        ->get();
+
+        $data = Promisorris::findOrFail($id);
+
+        return view('print_promi',['user'=>$users,'Promisorris'=>$data])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
+    }
+    
+    public function Getusers()
+    {
+        $data = Promisorris::all();
+        
+        $users = DB::table('promisorris')
+        ->join('users','promisorris.verified_by','=','users.id')
+        ->select('users.*','promisorris.*')
+        ->get();
+        return view('print_promi',['user'=>$users,'Promisorris'=>$data])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
     }
 
     /**

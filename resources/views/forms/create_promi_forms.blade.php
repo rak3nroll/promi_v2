@@ -66,18 +66,45 @@
             </div>
             <div class="row">
               <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="tr_no_recon">TR Number</label>
+                 <input type="text" name="tr_no_recon" id="tr_no_recon" class="form-control">
+                </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="partial_payment">Partial Payment: </label>
-                  
-                    <input name="partial" id="partial" type="checkbox" onclick="isChecked()">
-                    <label for="">  50%</label>
-                  
-                  <input type="text" id="partial_payment" name="partial_payment" class="form-control">
+                  <label for="recon_fee">Reconnection Fee:</label>
+                  <input type="text" name="recon_fee" id="recon_fee" class="form-control" value="112.00">             
                 </div>
               </div>
-            </div>
+            </div>    
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="tr_no_surcharge">TR Number</label>
+                 <input type="text" name="tr_no_surcharge" id="tr_no_surcharge" class="form-control">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="surcharge">Surcharge:</label>
+                  <input type="text" name="surcharge" id="surcharge" class="form-control">             
+                </div>
+              </div> 
+            </div>        
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="sub_total">Sub Total</label>
+                  <input type="text" id="sub_total" name="sub_total" class="form-control" >
+                </div>
+              </div>
+            </div>  
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
@@ -89,6 +116,18 @@
                 <div class="form-group">
                   <label for="total_amount">Total Amount</label>
                   <input type="text" id="total_amount" name="total_amount" class="form-control" >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="partial_payment">Partial Payment: </label>
+                    <input name="partial" id="partial" type="checkbox" onclick="isChecked()">
+                    <label for="">  50%</label>
+                  <input type="text" id="partial_payment" name="partial_payment" class="form-control">
                 </div>
               </div>
             </div>
@@ -115,38 +154,7 @@
                   <input type="date" name="exp_date" id="exp_date" class="form-control">
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="">Other Charges</label>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="recon_fee">Reconnection Fee:</label>
-                  <input type="text" name="recon_fee" id="recon_fee" class="form-control" value="112.00">             
-                </div>
-              </div> 
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="tr_no_recon">TR Number</label>
-                 <input type="text" name="tr_no_recon" id="tr_no_recon" class="form-control">
-                </div>
-              </div>
-            </div>    
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="surcharge">Surcharge:</label>
-                  <input type="text" name="surcharge" id="surcharge" class="form-control">             
-                </div>
-              </div> 
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="tr_no_surcharge">TR Number</label>
-                 <input type="text" name="tr_no_surcharge" id="tr_no_surcharge" class="form-control">
-                </div>
-              </div>
-            </div>                   
+            </div>         
             <div class="form-group">
               <label for="remarks">Remarks</label>
               <textarea id="remarks" name="remarks" class="form-control" rows="4"></textarea>

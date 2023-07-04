@@ -114,7 +114,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('approver.home') }}">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -182,7 +182,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                      <table id="promi_table" class="table table-bordered table-striped">
+                      <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr align="center">
                                 <th>Consumer Name</th>

@@ -259,6 +259,12 @@
                                                                         </i>
                                                                         view
                                                                     </a>
+                                                                    <a class="btn btn-info btn-sm"
+                                                                    href="/print/{{ $promisorri->id }}">
+                                                                    <i class="fas fa-print">
+                                                                    </i>
+                                                                    Print
+                                                                </a>
                                                                 @endif
                                                             </td>
                                                         </tr>

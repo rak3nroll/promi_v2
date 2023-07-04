@@ -68,6 +68,7 @@ $.widget.bridge('uibutton', $.ui.button)
     bsCustomFileInput.init();
   });
   </script>
+
 <script>
 
 $(function() {
@@ -145,18 +146,21 @@ $(function() {
   </script>
 
   <script>
-    $('#total_balance, #partial_payment').on('change keyup', function(){
-      var tot_bal = $("#total_balance").val();
+    $('#total_balance, #partial_payment, #recon_fee, #surcharge ').on('change keyup', function(){
+      var tot_bal = parseInt($("#total_balance").val());
       var partial = $("#partial_payment").val();
-      var tot_amount = tot_bal - partial;
-     
+      var recon = parseInt($("#recon_fee").val());
+      var surcharge = parseInt($("#surcharge").val());
+      var tot_amount = (recon+tot_bal+surcharge)
+
+      $("#sub_total").val(round2Fixed(tot_amount));
       $("#total_amount").val(round2Fixed(tot_amount));
     });
-  
   
     $('#total_amount, #months_to_pay').on('change keyup', function(){
       var total_amount = $("#total_amount").val();
       var month_to_pay = $("#months_to_pay").val();
+     
       var per_month = total_amount / month_to_pay;
   
       $("#per_month").val(round2Fixed(per_month));
@@ -298,10 +302,10 @@ $(function() {
     </script>
     <script>
       function isChecked(){
-      var total_bal = document.getElementById("total_balance").value;
+      var sub_total_bal = document.getElementById("sub_total").value;
         if(document.getElementById("partial").checked){
-          document.getElementById("partial_payment").value = total_bal * .50;
-          document.getElementById("total_amount").value = total_bal - document.getElementById("partial_payment").value;
+          document.getElementById("partial_payment").value = sub_total_bal * .50;
+          document.getElementById("total_amount").value = sub_total_bal - document.getElementById("partial_payment").value;
         }
       }
     </script>

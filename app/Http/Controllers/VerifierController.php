@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Promisorris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class VerifierController extends Controller
@@ -84,7 +85,7 @@ class VerifierController extends Controller
     {
         DB::table('promisorris')
             ->where('id',$id)
-            ->update(['is_verified' => '1', 'date_verified' => now()->toDateTimeString()]);
+            ->update(['is_verified' => '1','verified_by'=> Auth::user()->id ,'date_verified' => now()->toDateTimeString()]);
 
         return redirect('/home/verifier')->with('message', 'Data was successfully updated');
     }
