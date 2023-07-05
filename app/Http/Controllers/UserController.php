@@ -52,7 +52,7 @@ class UserController extends Controller
         ->select('users.*','promisorris.*')
         ->get();        
 
-        return view('print_promi',['user'=>$users,'Promisorris'=>$data])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
+        return view('print_promi',['Promisorris'=>$data,'user'=>$users])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
     }
     
     public function Getusers()
