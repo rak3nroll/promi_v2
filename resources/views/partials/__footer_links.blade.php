@@ -161,7 +161,7 @@ $(function() {
       var total_amount = $("#total_amount").val();
       var month_to_pay = $("#months_to_pay").val();
      
-      var per_month = total_amount / month_to_pay;
+      var per_month = partial / month_to_pay;
   
       $("#per_month").val(round2Fixed(per_month));
     });
