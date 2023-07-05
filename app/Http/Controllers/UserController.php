@@ -44,12 +44,13 @@ class UserController extends Controller
 
     public function PrintPromi(string $id)
     {
+
+        $data = Promisorris::findOrFail($id);
+
         $users = DB::table('promisorris')
         ->join('users','promisorris.verified_by','=','users.id')
         ->select('users.*','promisorris.*')
-        ->get();
-
-        $data = Promisorris::findOrFail($id);
+        ->get();        
 
         return view('print_promi',['user'=>$users,'Promisorris'=>$data])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
     }
