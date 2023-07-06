@@ -45,25 +45,22 @@ class UserController extends Controller
     public function PrintPromi(string $id)
     {
 
-        $data = Promisorris::findOrFail($id);
-
-        $users = DB::table('promisorris')
-        ->join('users','promisorris.verified_by','=','users.id')
-        ->select('users.*','promisorris.*')
-        ->get();        
-
-        return view('print_promi',['Promisorris'=>$data,'user'=>$users])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
-    }
-    
-    public function Getusers()
-    {
-        $data = Promisorris::all();
-        
-        $users = DB::table('promisorris')
-        ->join('users','promisorris.verified_by','=','users.id')
-        ->select('users.*','promisorris.*')
+        // $data = Promisorris::findOrFail($id);
+        $data = DB::table('Promisorris')
+        ->where('id','=',$id)
         ->get();
-        return view('print_promi',['user'=>$users,'Promisorris'=>$data])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
+
+        // $users = DB::table('Promisorris')
+        // ->join('Users','Promisorris.verified_by','=','Users.id')
+        // ->select('Users.id','Users.name','Users.position', 'Promisorris.*')
+        // ->get();  
+
+        $users = DB::table('users')
+        ->where('Promisorris.id','=',$id)
+        ->Join('Promisorris', 'users.id', '=', 'Promisorris.verified_by')
+        ->get();
+      
+        return view('print_promi',['Promisorris'=>$data,'users'=>$users])->with('title','ORMECO-Promisorry Potal | Print Promissory Note');
     }
 
     /**

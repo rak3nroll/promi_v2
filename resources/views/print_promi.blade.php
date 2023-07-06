@@ -30,7 +30,7 @@
     <!-- Table row -->
     <div class="row">
       <div class="col-12 table-responsive">
-        <p style="text-align: justify; font-size: 18px; text-indent: 50px;">I <b><u>{{ $Promisorris->consumer_name }}</u></b> resident of <b><u>{{ $Promisorris->consumer_address }}</u></b> promised to pay the <b>ORIENTAL MINDORO ELECTRIC COOPERATIVE, INC. (ORMECO, Inc.)</b> the outstanding account in the name of <b>{{ $Promisorris->consumer_name }}</b> with account number <b>{{ $Promisorris->account_no }}</b> amounting to <b>{{ $Promisorris->total_balance }}</b> stated below </p>
+        <p style="text-align: justify; font-size: 18px; text-indent: 50px;">I <b><u>{{ $Promisorris[0]->consumer_name }}</u></b> resident of <b><u>{{ $Promisorris[0]->consumer_address }}</u></b> promised to pay the <b>ORIENTAL MINDORO ELECTRIC COOPERATIVE, INC. (ORMECO, Inc.)</b> the outstanding account in the name of <b>{{ $Promisorris[0]->consumer_name }}</b> with account number <b>{{ $Promisorris[0]->account_no }}</b> amounting to <b>{{ $Promisorris[0]->total_balance }}</b> stated below </p>
       </div>
       <!-- /.col -->
     </div>
@@ -46,27 +46,27 @@
             <table class="table">
               <tr>
                 <th style="width:50%">Total Amount:</th>
-                <td>php {{ $Promisorris->total_balance }}</td>
+                <td>php {{ $Promisorris[0]->total_balance }}</td>
               </tr>
               <tr>
                 <th>Reconnection Fee:</th>
-                <td>php {{ $Promisorris->recon_fee }}</td>
+                <td>php {{ $Promisorris[0]->recon_fee }}</td>
               </tr>
               <tr>
                   <th>Surcharge:</th>
-                  <td>php {{ $Promisorris->surcharge }}</td>
+                  <td>php {{ $Promisorris[0]->surcharge }}</td>
               </tr>
               <tr>
                 <th>Sub Total :</th>
-                <td>php {{ $Promisorris->total_balance +  $Promisorris->recon_fee + $Promisorris->surcharge}}</td>
+                <td>php {{ $Promisorris[0]->total_balance +  $Promisorris[0]->recon_fee + $Promisorris[0]->surcharge}}</td>
               </tr>
               <tr>
                 <th>Less Partial Payment :</th>
-                <td>php {{ $Promisorris->partial_payment }}</td>
+                <td>php {{ $Promisorris[0]->partial_payment }}</td>
               </tr>
               <tr>
                 <th>Total Balance:</th>
-                <td><b>php {{ ($Promisorris->total_balance +  $Promisorris->recon_fee + $Promisorris->surcharge) - $Promisorris->partial_payment }}</b></td>
+                <td><b>php {{ ($Promisorris[0]->total_balance +  $Promisorris[0]->recon_fee + $Promisorris[0]->surcharge) - $Promisorris[0]->partial_payment }}</b></td>
               </tr>
             </table>
           </div>
@@ -76,8 +76,8 @@
           <div class="table-responsive">
             <table class="table">
               <script>
-                const start_date = new Date("{{ $Promisorris->start_date }}"); 
-                const exp_date = new Date("{{ $Promisorris->exp_date }}"); 
+                const start_date = new Date("{{ $Promisorris[0]->start_date }}"); 
+                const exp_date = new Date("{{ $Promisorris[0]->exp_date }}"); 
                 var month =  ("0"+(start_date.getMonth()+1)).slice(-2);
                 var month1 = ("0"+(exp_date.getMonth()+1)).slice(-2);
                 var day =  ("0" + start_date.getDate()).slice(-2);
@@ -91,7 +91,7 @@
                          
                           text = yyyy + "-" + rows + "-" + day + "<br>";
                           document.write(" <td >" + text + "</td> ")                        
-                          document.write(" <td >php " + {{ $Promisorris->per_month }} + "</td> ")
+                          document.write(" <td >php " + {{ $Promisorris[0]->per_month }} + "</td> ")
                           document.write(" <td ></td> ")
                           document.write(" </tr> ")
                         }
@@ -107,14 +107,14 @@
       <!-- /.col -->
       <div class="row">
         <div class="col-12 table-responsive">
-          <p style="text-align: justify; font-size: 18px; text-indent: 50px;">I further understand that my non-payment of the above stated account within the prescribed period, will give automatic right to <b>ORMECO</b> to get the service drop and meter of <b>{{ $Promisorris->consumer_name }}</b>.</p>
+          <p style="text-align: justify; font-size: 18px; text-indent: 50px;">I further understand that my non-payment of the above stated account within the prescribed period, will give automatic right to <b>ORMECO</b> to get the service drop and meter of <b>{{ $Promisorris[0]->consumer_name }}</b>.</p>
         </div>
         <!-- /.col -->
       </div>
       <div class="row">
         <div class="col-12 table-responsive">
           <br>
-          <p style="text-align: justify; font-size: 18px;"><B>{{ $Promisorris->consumer_name }}</B>
+          <p style="text-align: justify; font-size: 18px;"><B>{{ $Promisorris[0]->consumer_name }}</B>
             <br>Name of Consumer
           </p>
         </div>
@@ -129,8 +129,8 @@
         </div>
         <div class="col-3 table-responsive">
           <p style="text-align: Center; font-size: 18px;"><B>Recommended By :</B>
-            <br><br><b>{{ $user->name }}</b><br>
-            {{ $user->position }}
+            <br><br><b>{{ $users[0]->name }}</b><br>
+            {{ $users[0]->position }}
           </p>
         </div>
         <div class="col-3 table-responsive">

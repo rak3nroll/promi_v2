@@ -127,6 +127,65 @@
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12">
+                  <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-add-user">
+                    <i class="fas fa-user-plus"> 
+                    </i>
+                         Add new user
+                    </a>
+                    
+                </div>  <div class="col-12">
+                  <br>
+                  <div class="modal fade" id="modal-add-user">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header bg-info">
+                          <h4 class="modal-title"><i class="fas fa-user-plus"> </i> Add new User</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="#" method="post">
+                          @method('PUT')
+                            @csrf
+                            <div class="form-group">
+                              <label for="user_id">User ID:</label>
+                              <input type="text" name="user_id" id="user_id" class="form-control col-4">
+                            </div>
+                            <div class="form-group">
+                              <label for="user_name">Name:</label>
+                              <input type="text" name="user_name" id="user_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="user_name">Position:</label>
+                              <input type="text" name="user_name" id="user_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="email">Email Address:</label>
+                              <input type="text" name="email" id="email" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                              <label for="role">User Role:</label>
+                              <input type="text" name="role" id="role" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="district">District Office:</label>
+                              <input type="text" name="district" id="district" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                        </form>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
+                  <!-- /.modal -->
+                </div>
+                <div class="col-12">
                   <!-- /.card -->
                   <div class="card">
                     <div class="card-header">
@@ -175,8 +234,8 @@
                           <div class="modal fade" id="modal-edit-user-{{ $promisorri->id}}">
                             <div class="modal-dialog">
                               <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title"><i class="fas fa-edit"></i> Edit user information</h4>
+                                <div class="modal-header bg-info">
+                                  <h4 class="modal-title"><i class="fas fa-user-edit"></i> User information</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -191,19 +250,123 @@
                                     </div>
                                     <div class="form-group">
                                       <label for="user_name">Name:</label>
-                                      <input type="text" name="user_name" id="user_name" class="form-control" disabled value="{{ $promisorri->name }}">
+                                      <input type="text" name="user_name" id="user_name" class="form-control" value="{{ $promisorri->name }}">
                                     </div>
                                     <div class="form-group">
                                       <label for="email">Email Address:</label>
-                                      <input type="text" name="email" id="email" class="form-control" disabled value="{{ $promisorri->email }}">
+                                      <input type="text" name="email" id="email" class="form-control" value="{{ $promisorri->email }}">
                                     </div>
                                     <div class="form-group">
-                                      <label for="role">User Role:</label>
-                                      <input type="text" name="role" id="role" class="form-control" value="{{ $promisorri->role }}">
+                                      <label for="position">Position:</label>
+                                      <input type="text" name="position" id="position" class="form-control" value="{{ $promisorri->position }}">
                                     </div>
                                     <div class="form-group">
-                                      <label for="district">District Office:</label>
-                                      <input type="text" name="district" id="district" class="form-control" value="{{ $promisorri->district }}">
+                                      <label for="access_level">Access Level:</label>
+                                      <select class="form-control">
+                                        @if ($promisorri->role =='user' )
+                                          <option>{{ $promisorri->role }}</option>
+                                          <option>Verifier</option>
+                                          <option>Billing</option>
+                                        @elseif ($promisorri->role == 'verifier' )
+                                          <option>{{ $promisorri->role }}</option>
+                                          <option>User</option>
+                                          <option>Billing</option>                                      
+                                        @elseif ($promisorri->role == 'billing' )
+                                          <option>{{ $promisorri->role }}</option>
+                                          <option>User</option>
+                                          <option>Verifier</option>
+                                        @endif
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="district">District Office:</label>
+                                        <select class="form-control">
+                                          @if ($promisorri->district == "District 1A" )
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1B</option>
+                                            <option>District 2</option>
+                                            <option>District 3</option>
+                                            <option>District 4</option>
+                                            <option>District 5</option>
+                                            <option>District 6</option>
+                                            <option>District 7</option>  
+                                          @elseif ($promisorri->district == "District 1B")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 2</option>
+                                            <option>District 3</option>
+                                            <option>District 4</option>
+                                            <option>District 5</option>
+                                            <option>District 6</option>
+                                            <option>District 7</option>
+                                          @elseif ($promisorri->district == "District 2")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 1B</option>
+                                            <option>District 3</option>
+                                            <option>District 4</option>
+                                            <option>District 5</option>
+                                            <option>District 6</option>
+                                            <option>District 7</option>
+                                          @elseif ($promisorri->district == "District 3")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 1B</option>
+                                            <option>District 2</option>
+                                            <option>District 4</option>
+                                            <option>District 5</option>
+                                            <option>District 6</option>
+                                            <option>District 7</option>
+                                          @elseif ($promisorri->district == "District 4")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 1B</option>
+                                            <option>District 2</option>
+                                            <option>District 3</option>
+                                            <option>District 5</option>
+                                            <option>District 6</option>
+                                            <option>District 7</option>    
+                                          @elseif ($promisorri->district == "District 5")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 1B</option>
+                                            <option>District 2</option>
+                                            <option>District 3</option>
+                                            <option>District 4</option>
+                                            <option>District 6</option>
+                                            <option>District 7</option>
+                                          @elseif ($promisorri->district == "District 6")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 1B</option>
+                                            <option>District 2</option>
+                                            <option>District 3</option>
+                                            <option>District 4</option>
+                                            <option>District 5</option>
+                                            <option>District 7</option>
+                                          @elseif ($promisorri->district == "District 7")
+                                            <option>{{ $promisorri->district }}</option>
+                                            <option>District 1A</option>
+                                            <option>District 1B</option>
+                                            <option>District 2</option>
+                                            <option>District 3</option>
+                                            <option>District 4</option>
+                                            <option>District 5</option>
+                                            <option>District 6</option>                                                  
+                                          @endif
+                                        </select>
+                                        <div class="form-group">
+                                          <label for="Account_status">Account Status:</label>
+                                          <select class="form-control">
+                                            @if ($promisorri->status =='0' )
+                                              <option>Deactivate</option>
+                                              <option>Activate</option>
+                                            @elseif ($promisorri->status =='1' )
+                                              <option>Active</option>
+                                              <option>Deactivate</option>
+                                            @endif
+                                          </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">

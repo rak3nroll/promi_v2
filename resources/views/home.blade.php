@@ -264,7 +264,7 @@
                                                                     <i class="fas fa-print">
                                                                     </i>
                                                                     Print
-                                                                </a>
+                                                                    </a>
                                                                 @endif
                                                             </td>
                                                         </tr>
