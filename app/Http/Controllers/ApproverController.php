@@ -53,34 +53,15 @@ class ApproverController extends Controller
     public function update(Request $request, string $id)
     {
         $validate_request = $request->validate([
-            "consumer_name" => '',
-            "consumer_address" =>'',
-            "consumer_contact" => '',
-            "account_no" =>'',
-            "no_of_bills" =>'',
-            "total_balance" =>'',
-            "partial_payment" => '',
-            "total_amount" =>'',
-            "months_to_pay" =>'',
-            "per_month" =>'',
-            "start_date" =>'',
-            "exp_date" =>'',
-            "recon_fee" => '',
-            "tr_no_recon" => '',
-            "surcharge" => '',
-            "tr_no_surcharge" => '',
-            "remarks" => '',
-            "is_verified" => '',
-            "date_verified" => '',
-            "is_approve" => '',
-            "approve_date" => '',
-            "is_posted" => '',
-            "date_posted" => '',
-            "encoder" => '',
-            "district" => '',
+            "name"=>'',
+            "email"=>'',
+            "position"=>'',
+            "role"=>'',
+            "district"=>'',
+            "status"=>'',           
         ]);
         
-        DB::table('promisorris')
+        DB::table('users')
         ->where('id', $id)
         ->update($validate_request);
         

@@ -224,11 +224,6 @@
                                 </i>
                                      Edit
                                 </a>
-                                <a class="btn btn-danger btn-sm deletemessage" href="#" >
-                                  <i class="fas fa-user-slash">
-                                  </i>
-                                      Deactivate
-                                  </a>
                             </td>
                           </tr>
                           <div class="modal fade" id="modal-edit-user-{{ $promisorri->id}}">
@@ -241,7 +236,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                <form action="edit/user/{{ $promisorri->id}}" method="post">
+                                <form action="/user/{{ $promisorri->id}}" method="post" id="updateuser" name="updateuser">
                                   @method('PUT')
                                     @csrf
                                     <div class="form-group">
@@ -249,132 +244,132 @@
                                       <input type="text" name="user_id" id="user_id" class="form-control col-4" disabled value="{{ $promisorri->id }}">
                                     </div>
                                     <div class="form-group">
-                                      <label for="user_name">Name:</label>
-                                      <input type="text" name="user_name" id="user_name" class="form-control" value="{{ $promisorri->name }}">
+                                      <label for="name">Name:</label>
+                                      <input type="text" name="name" id="name" class="form-control" value="{{ $promisorri->name }}">
                                     </div>
                                     <div class="form-group">
                                       <label for="email">Email Address:</label>
-                                      <input type="text" name="email" id="email" class="form-control" value="{{ $promisorri->email }}">
+                                      <input type="email" name="email" id="email" class="form-control" value="{{ $promisorri->email }}">
                                     </div>
                                     <div class="form-group">
                                       <label for="position">Position:</label>
                                       <input type="text" name="position" id="position" class="form-control" value="{{ $promisorri->position }}">
                                     </div>
                                     <div class="form-group">
-                                      <label for="access_level">Access Level:</label>
-                                      <select class="form-control">
-                                        @if ($promisorri->role =='user' )
-                                          <option>{{ $promisorri->role }}</option>
-                                          <option>Verifier</option>
-                                          <option>Billing</option>
+                                      Access Level:
+                                      <select class="form-control" name="role" id="role">
+                                        @if ($promisorri->role == 'user' )
+                                          <option value="0">{{ $promisorri->role }}</option>
+                                          <option value="1">Verifier</option>
+                                          <option value="3">Billing</option>
                                         @elseif ($promisorri->role == 'verifier' )
-                                          <option>{{ $promisorri->role }}</option>
-                                          <option>User</option>
-                                          <option>Billing</option>                                      
+                                          <option value="1">{{ $promisorri->role }}</option>
+                                          <option value="0">user</option>
+                                          <option value="3">Billing</option>                                      
                                         @elseif ($promisorri->role == 'billing' )
-                                          <option>{{ $promisorri->role }}</option>
-                                          <option>User</option>
-                                          <option>Verifier</option>
+                                          <option value="3">{{ $promisorri->role }}</option>
+                                          <option value="0">user</option>
+                                          <option value="1">Verifier</option>
                                         @endif
                                       </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="district">District Office:</label>
-                                        <select class="form-control">
+                                        District Office:
+                                        <select class="form-control" name="district" id="district">
                                           @if ($promisorri->district == "District 1A" )
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1B</option>
-                                            <option>District 2</option>
-                                            <option>District 3</option>
-                                            <option>District 4</option>
-                                            <option>District 5</option>
-                                            <option>District 6</option>
-                                            <option>District 7</option>  
+                                            <option value="District 1A">{{ $promisorri->district }}</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 6">District 6</option>
+                                            <option value="District 7">District 7</option>  
                                           @elseif ($promisorri->district == "District 1B")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 2</option>
-                                            <option>District 3</option>
-                                            <option>District 4</option>
-                                            <option>District 5</option>
-                                            <option>District 6</option>
-                                            <option>District 7</option>
+                                            <option value="District 1B">{{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 6">District 6</option>
+                                            <option value="District 7">District 7</option>
                                           @elseif ($promisorri->district == "District 2")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 1B</option>
-                                            <option>District 3</option>
-                                            <option>District 4</option>
-                                            <option>District 5</option>
-                                            <option>District 6</option>
-                                            <option>District 7</option>
+                                            <option value="District 2">{{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 6">District 6</option>
+                                            <option value="District 7">District 7</option>
                                           @elseif ($promisorri->district == "District 3")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 1B</option>
-                                            <option>District 2</option>
-                                            <option>District 4</option>
-                                            <option>District 5</option>
-                                            <option>District 6</option>
-                                            <option>District 7</option>
+                                            <option value="District 3">{{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 6">District 6</option>
+                                            <option value="District 7">District 7</option>
                                           @elseif ($promisorri->district == "District 4")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 1B</option>
-                                            <option>District 2</option>
-                                            <option>District 3</option>
-                                            <option>District 5</option>
-                                            <option>District 6</option>
-                                            <option>District 7</option>    
+                                            <option value="District 4">{{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 6">District 6</option>
+                                            <option value="District 7">District 7</option>  
                                           @elseif ($promisorri->district == "District 5")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 1B</option>
-                                            <option>District 2</option>
-                                            <option>District 3</option>
-                                            <option>District 4</option>
-                                            <option>District 6</option>
-                                            <option>District 7</option>
+                                            <option value="District 5">{{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 6">District 6</option>
+                                            <option value="District 7">District 7</option>  
                                           @elseif ($promisorri->district == "District 6")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 1B</option>
-                                            <option>District 2</option>
-                                            <option>District 3</option>
-                                            <option>District 4</option>
-                                            <option>District 5</option>
-                                            <option>District 7</option>
+                                            <option value="District 6">{{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 7">District 7</option>  
                                           @elseif ($promisorri->district == "District 7")
-                                            <option>{{ $promisorri->district }}</option>
-                                            <option>District 1A</option>
-                                            <option>District 1B</option>
-                                            <option>District 2</option>
-                                            <option>District 3</option>
-                                            <option>District 4</option>
-                                            <option>District 5</option>
-                                            <option>District 6</option>                                                  
+                                            <option value="District 7"> {{ $promisorri->district }}</option>
+                                            <option value="District 1A">District 1A</option>
+                                            <option value="District 1B">District 1B</option>
+                                            <option value="District 2">District 2</option>
+                                            <option value="District 3">District 3</option>
+                                            <option value="District 4">District 4</option>
+                                            <option value="District 5">District 5</option>
+                                            <option value="District 6">District 6</option>                                 
                                           @endif
                                         </select>
                                         <div class="form-group">
-                                          <label for="Account_status">Account Status:</label>
-                                          <select class="form-control">
-                                            @if ($promisorri->status =='0' )
-                                              <option>Deactivate</option>
-                                              <option>Activate</option>
-                                            @elseif ($promisorri->status =='1' )
-                                              <option>Active</option>
-                                              <option>Deactivate</option>
+                                          Account Status:
+                                          <select class="form-control" name="status" id="status">
+                                            @if ($promisorri->status ==2 )
+                                              <option value="2">Deactivate</option>
+                                              <option value="1">Activate</option>
+                                            @elseif ($promisorri->status ==1 )
+                                              <option value="1">Active</option>
+                                              <option value="2">Deactivate</option>
                                             @endif
                                           </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer justify-content-between">
-                                  <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                  </div>
                                 </div>
-                              </div>
-                                </form>
+                              </form>
                               <!-- /.modal-content -->
                             </div>
                             <!-- /.modal-dialog -->

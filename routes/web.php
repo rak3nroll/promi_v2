@@ -45,7 +45,7 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
 Route::middleware(['auth', 'user-role:approver'])->group(function () {
     Route::get('/home/admin', [HomeController::class, 'approverHome'])->name('approver.home');
     Route::get('/admin/manage_user', [PromisorrisController::class, 'showuser'])->name('show.user');
-    Route::put('/edit/user/{id}', [ApproverController::class, 'update'])->name('update.user');
+    Route::put('/user/{id}', [ApproverController::class, 'update'])->name('update.user');
     Route::get('/user/{id}', [PromisorrisController::class, 'showUserDetails'])->name('user.details');
     Route::get('/record/{id}', [PromisorrisController::class, 'showPromisorry'])->name('show.promi');
     Route::put('/record/{id}', [PromisorrisController::class, 'updatePromisorry'])->name('update.promi');

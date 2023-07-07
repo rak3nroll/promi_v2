@@ -133,7 +133,8 @@ class PromisorrisController extends Controller
     
     public function showuser()
     {
-        $data = User::all();
+        $data = User::all()
+        ->where('role' ,'<>', 'approver');
 
         $is_approve = DB::table('promisorris')
             ->where('is_approve', '<>', '0')

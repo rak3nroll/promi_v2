@@ -279,6 +279,7 @@ $(function() {
       });
     });
     </script>
+
     <script>
        $('.deletemessage').click(function() {
       Swal.fire({
@@ -309,3 +310,83 @@ $(function() {
         }
       }
     </script>
+
+<script>
+  $('.activateuser').click(function() {
+ Swal.fire({
+   title: 'Are you sure?',
+   text: "You want to activate this account?",
+   icon: 'question',
+   showCancelButton: true,
+   confirmButtonColor: '#3085d6',
+   cancelButtonColor: '#d33',
+   confirmButtonText: 'Yes, Activate!'
+ }).then((result) => {
+   if (result.isConfirmed) {
+     Swal.fire(
+       'Deactivated!',
+       'User account has been Activated.',
+       'success'
+     )
+   }
+ })
+});
+</script>
+
+<script>
+   $(function () {
+    $('#updateuser').validate({
+      rules: {
+        name: {
+          required: true,
+        },
+        email: {
+          required: true|email,
+        },
+        position: {
+          required: true,
+        },
+        role: {
+          required: true,
+        },
+        district: {
+          required: true,
+        },
+        status: {
+          required: true,
+        },
+      },
+      messages: {
+        name: {
+          required: "Invalid Input of name",
+        },
+        email: {
+          required: "Invalid input of email",
+        },
+        position: {
+          required: "Invalid input of position",
+        },
+        role: {
+          required: "Select access level of user",
+        },
+        district: {
+          required: "Select district office",
+        },
+        status: {
+          required: "Select account status",
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
