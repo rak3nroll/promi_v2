@@ -151,12 +151,15 @@ $(function() {
       var partial = $("#partial_payment").val();
       var recon = parseInt($("#recon_fee").val());
       var surcharge = parseInt($("#surcharge").val());
-      var tot_amount = (recon+tot_bal+surcharge)
+      var tot_amount1 = (recon+tot_bal+surcharge)
 
-      $("#sub_total").val(round2Fixed(tot_amount));
-      $("#total_amount").val(round2Fixed(tot_amount));
+      $("#sub_total").val(round2Fixed(tot_amount1));
+
+      var total_amout2 = tot_amount1 - partial
+
+      $("#total_amount").val(round2Fixed(total_amout2));
     });
-  
+
     $('#total_amount, #months_to_pay').on('change keyup', function(){
       var total_amount = $("#total_amount").val();
       var month_to_pay = $("#months_to_pay").val();
@@ -167,6 +170,9 @@ $(function() {
     });
   </script>
   
+  <script>
+     
+  </script>
   <script>
     $(function () {
       // $.validator.setDefaults({
@@ -307,5 +313,6 @@ $(function() {
           document.getElementById("partial_payment").value = sub_total_bal * .50;
           document.getElementById("total_amount").value = sub_total_bal - document.getElementById("partial_payment").value;
         }
+
       }
     </script>

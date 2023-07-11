@@ -107,6 +107,18 @@
             </div>  
             <div class="row">
               <div class="col-sm-6">
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="partial_payment">Partial Payment: </label>
+                    <input name="partial" id="partial" type="checkbox" onclick="isChecked()">
+                    <label for="">  50%</label>
+                  <input type="text" id="partial_payment" name="partial_payment" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label for="months_to_pay">How many months to pay</label>
                   <input type="text" id="months_to_pay" name="months_to_pay" class="form-control">
@@ -119,18 +131,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="partial_payment">Partial Payment: </label>
-                    <input name="partial" id="partial" type="checkbox" onclick="isChecked()">
-                    <label for="">  50%</label>
-                  <input type="text" id="partial_payment" name="partial_payment" class="form-control">
-                </div>
-              </div>
-            </div>
+            
             <div class="row">
               <div class="col-sm-6">
               </div>
