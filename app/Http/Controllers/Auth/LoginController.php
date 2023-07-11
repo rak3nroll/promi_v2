@@ -62,9 +62,8 @@ class LoginController extends Controller
                 return redirect()->route('home')->with('title', 'ORMECO-Promisorry Potal | Home');
             }
         } else {
-            return redirect()
-                ->route('login')
-                ->with('error', 'Incorrect email or password');
+            session::flash('message','Invalid email address or password');
+            return redirect('/login')->with('status','Incorrect Login');
         }
     }
 }
